@@ -1,20 +1,20 @@
 const readline = require("readline");
 
-const teclado = readline.createInterface({
+const scanner = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-iniciarPrograma();
+startProgram();
 
-function apresentaMensagemERetornaResposta(mensagem, callback){
-    teclado.question(mensagem + ": ", function(resposta){
-        callback(resposta);
+function displaysMessageAndReturnsResponse(message, callback){
+    scanner.question(message + ": ", function(response){
+        callback(response);
     });
 }
 
-function vafificaNivelHeroi(name, xp){
-    let nivel = 
+function checkLevel(name, xp){
+    let level = 
         xp >= 10001 ? "Radiante": 
         xp >= 9001 ? "Imortal": 
         xp >= 8001 ? "Ascendente": 
@@ -22,20 +22,20 @@ function vafificaNivelHeroi(name, xp){
         xp >= 5001 ? "Ouro": 
         xp >= 2001 ? "Prata": 
         xp >= 1001 ? "Bronze": "Ferro";
-    return `O herói de nome ${name} está no nível de ${nivel}.`;
+    return `O herói de nome ${name} está no nível de ${level}.`;
 }
 
-function iniciarPrograma(){
-    apresentaMensagemERetornaResposta("Digite o nome do herói (ou 'sair' para encerrar)", function(name){
+function startProgram(){
+    displaysMessageAndReturnsResponse("Digite o nome do herói (ou 'sair' para encerrar)", function(name){
         if(name.toLowerCase() === 'sair'){
             console.log("Programa encerrado.");
-            teclado.close();
+            scanner.close();
             return;
         }
-        apresentaMensagemERetornaResposta("Digite a quantidade de XP do herói", function(xp){
-            console.log(vafificaNivelHeroi(name, parseInt(xp)));
+        displaysMessageAndReturnsResponse("Digite a quantidade de XP do herói", function(xp){
+            console.log(checkLevel(name, parseInt(xp)));
             console.log("----------------------------------");
-            iniciarPrograma();
+            startProgram();
         })
     });
 }
