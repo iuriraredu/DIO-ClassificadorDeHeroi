@@ -36,6 +36,6 @@ function startProgram(){
             console.log(checkLevel(name, parseInt(xp)));
             console.log("----------------------------------");
             startProgram();
-        })
+        });
     });
 }
